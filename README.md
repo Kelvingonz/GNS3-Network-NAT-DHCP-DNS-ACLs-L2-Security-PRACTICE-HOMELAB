@@ -64,6 +64,17 @@ permit 192.168.20.0 0.0.0.255 <br>
       - Domain: kelvin.lab.local
       - Default Gateway: 192.168.20.254
 
+### DHCP Verification: <BR>
+The command to request an IP address from DHCP server is "ip dhcp" in GNS3 VM. In a Windows environment the command is "ipconfig /renew"
+
+#### CLICK GIF
+<img width="1000" height="506" alt="DHCP-Verification-subnet1" src="https://github.com/user-attachments/assets/9c13f5f7-fd66-4eeb-af05-4884a2def8a6" />
+
+### DNS Verification:
+<img width="894" height="309" alt="WAN-ISP-DNS Verification" src="https://github.com/user-attachments/assets/845a0a70-595b-4736-8327-528d8c4cfefc" />
+
+
+
 ### Layer 2 Security
 - DHCP Snooping enabled
   - Trusted ports configured toward router/uplinks
@@ -78,6 +89,12 @@ permit 192.168.20.0 0.0.0.255 <br>
 - NAT overload (PAT)
 - DNS reachability
 - L2 security protections against spoofing and unauthorized rogue device plug-ins
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+[Verifications](https://github.com/Kelvingonz/GNS3-Network-NAT-DHCP-DNS-ACLs-L2-Security-/tree/main/Verifications)
+<br>
+[Full Configurations](https://github.com/Kelvingonz/GNS3-Network-NAT-DHCP-DNS-ACLs-L2-Security-/tree/main/Configurations)
 
 ## Author
 
