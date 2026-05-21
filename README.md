@@ -2,14 +2,19 @@
 
 <img width="1920" height="902" alt="Topology" src="https://github.com/user-attachments/assets/84b13be9-0c30-46ce-a2f4-b9e8129b3784" />
 <br>
-Simplified 2-tier enterprise campus architecture featuring Access Layer, Distribution Layer, Edge/WAN Layer,NAT, DHCP, DNS, ACLs, L3 Routing, L2 switching, and L2 security via GNS3 VM. <br>
 
-## Overview
-Limitations: This topology contains single points of failure and lacks redundancy. Future improvements include adding dual devices, FHRP, and link redundancy.
+Simplified 2-tier enterprise campus architecture featuring Access Layer, Distribution Layer, Edge/WAN Layer,NAT, DHCP, DNS, ACLs, L3 Routing, L2 switching, and L2 security via GNS3 VM. 
+<br>
 
-This lab was built using Cisco Virtual IOS L2 (vIOS L2) switch images and Cisco 7200 IOS (C7200-ADVENTERPRISEK9-M) router images.
+This lab was built using Cisco Virtual IOS L2 (vIOS L2) switch images, Cisco 7200 IOS (C7200-ADVENTERPRISEK9-M) router images, Virtual PCs, and VMware bridged networking (VMnet0)
 
-### This GNS3 project simulates a network with:
+## Limitations
+1) This topology contains no traffic isolation, single points of failure and lacks redundancy. Future improvements include VLAN separation, adding dual devices, FHRP, and link redundancy. 
+<br>
+
+2) A true public IP address for the simulated WAN segment wont be used but rather a private address because the lab environment is hosted behind my home router performing NAT (VMnet0).
+
+## This GNS3 project simulates a network with:
 
 - NAT overload (PAT) for internet access
 - ACLs to identify which traffic should be translated via PAT 
@@ -35,7 +40,7 @@ The WAN-facing interface does not use a true public IP address because the lab e
   Network ---- Gateway ----
 - 192.168.10.0/24 ---- 192.168.10.254 ---- 
 - 192.168.20.0/24 ----	192.168.20.254 ---- 
-
+---------------------------------------------------------------------------------------------------------------------------------
 ### NAT + ACLs
 
 #### Implemented on Edge Router
@@ -49,8 +54,8 @@ permit 192.168.10.0 0.0.0.255 <br>
 permit 192.168.20.0 0.0.0.255 <br>
 
 - ip nat inside source list PAT interface GigabitEthernet0/0 overload
-
-### DHCP
+---------------------------------------------------------------------------------------------------------------------------------
+### DHCP + DNS
 #### Centralized on Distribution Router
 - Excluded IP Addresses: 192.168.10.254 and 192.168.20.254
   - Reserved to keep static IP addresses on access switches.
@@ -73,8 +78,7 @@ The command to request an IP address from DHCP server is "ip dhcp" in GNS3 VM. I
 ### DNS Verification:
 <img width="894" height="309" alt="WAN-ISP-DNS Verification" src="https://github.com/user-attachments/assets/845a0a70-595b-4736-8327-528d8c4cfefc" />
 
-
-
+---------------------------------------------------------------------------------------------------------------------------------
 ### Layer 2 Security
 - DHCP Snooping enabled
   - Trusted ports configured toward router/uplinks
@@ -83,7 +87,7 @@ The command to request an IP address from DHCP server is "ip dhcp" in GNS3 VM. I
    - Enabled on switch ports connected to end-users
    - Maximum MAC addresses allowed on each switch: 2
    - Violation mode set to restrict 
-
+---------------------------------------------------------------------------------------------------------------------------------
 ### Features Implemented
 - DHCP services
 - NAT overload (PAT)
