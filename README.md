@@ -9,7 +9,7 @@ Simplified 2-tier enterprise campus architecture featuring Access Layer, Distrib
 This lab was built using Cisco Virtual IOS L2 (vIOS L2) switch images, Cisco 7200 IOS (C7200-ADVENTERPRISEK9-M) router images, Virtual PCs, and VMware bridged networking (VMnet0)
 
 ## Limitations
-1) This topology contains no traffic isolation, single points of failure and lacks redundancy. Future improvements include VLAN separation, adding dual devices, FHRP, and link redundancy. 
+1) This topology contains no traffic isolation, has single points of failure and lacks redundancy. Future improvements include VLAN separation, adding dual devices, FHRP, and link redundancy. 
 <br>
 
 2) A true public IP address for the simulated WAN segment wont be used but rather a private address because the lab environment is hosted behind my home router performing NAT (VMnet0).
