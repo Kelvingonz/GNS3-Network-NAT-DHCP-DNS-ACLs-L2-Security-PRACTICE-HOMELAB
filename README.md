@@ -33,7 +33,7 @@ This lab was built using Cisco Virtual IOS L2 (vIOS L2) switch images, Cisco 720
 
 #####  #IMPORTANT NOTE# <br>
 
-The WAN-facing interface does not use a true public IP address because the lab environment is connected behind my home router. The “public” WAN segment is simulated using the 192.168.1.0/24 private address space through VMware bridged networking (VMnet0).
+The WAN-facing interface on the Edge Router does not use a true public IP address because the lab environment is connected behind my home router. The “public” WAN segment is simulated using the 192.168.1.0/24 private address space through VMware bridged networking (VMnet0).
 
 - Cloud (Network Adapter VMnet0 - Bridged)
    - Home router performs a second NAT translation to a real public IP before reaching the internet
