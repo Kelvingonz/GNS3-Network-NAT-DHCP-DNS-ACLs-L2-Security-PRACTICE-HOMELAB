@@ -102,6 +102,7 @@ The command to request an IP address from DHCP server is "ip dhcp" in GNS3 VM. I
    - Violation mode set to restrict 
 ---------------------------------------------------------------------------------------------------------------------------------
 ### Features Implemented
+- L3 Routing / L2 Switching
 - DHCP services
 - NAT overload (PAT)
 - DNS reachability
