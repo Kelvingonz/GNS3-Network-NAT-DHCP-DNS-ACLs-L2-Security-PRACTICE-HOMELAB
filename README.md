@@ -13,7 +13,7 @@ This lab was built using Cisco Virtual IOS L2 (vIOS L2) switch images, Cisco 720
 <br>
 
 2) A true public IP address for the simulated WAN segment wont be used but rather a private address because the lab environment is hosted behind my home router performing NAT via VMnet0 (The Cloud at top of topology), I will however still configure NAT on the edge router.
-   - In other words this topology demonstrates double NAT: <br>
+   - In other words this topology has double NAT but only one will be manually configured: <br>
             - Internal client traffic is translated by the Edge Router using PAT to 192.168.1.153 <br>
             - The traffic then exits through the VMware bridge/cloud <br>
             - The home router performs a second NAT translation to a real public IP before reaching the internet <br>
