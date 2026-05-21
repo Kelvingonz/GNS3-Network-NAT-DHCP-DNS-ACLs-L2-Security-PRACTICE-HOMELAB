@@ -12,7 +12,11 @@ This lab was built using Cisco Virtual IOS L2 (vIOS L2) switch images, Cisco 720
 1) This topology contains no traffic isolation, has single points of failure and lacks redundancy. Future improvements include VLAN separation, adding dual devices, FHRP, and link redundancy. 
 <br>
 
-2) A true public IP address for the simulated WAN segment wont be used but rather a private address because the lab environment is hosted behind my home router performing NAT (VMnet0).
+2) A true public IP address for the simulated WAN segment wont be used but rather a private address because the lab environment is hosted behind my home router performing NAT via VMnet0 (The Cloud at top of topology), I will however still configure on NAT on the edge router.
+   - In other words this topology demonstrates double NAT: <br>
+            - Internal client traffic is translated by the Edge Router using PAT to 192.168.1.153 <br>
+            - The traffic then exits through the VMware bridge/cloud <br>
+            - The home router performs a second NAT translation to a real public IP before reaching the internet <br>
 
 ## This GNS3 project simulates a network with:
 
@@ -21,8 +25,9 @@ This lab was built using Cisco Virtual IOS L2 (vIOS L2) switch images, Cisco 720
 - DHCP services for internal subnets
 - Layer 2 switching / Layer 3 routing 
 - DHCP Snooping and Port Security (Sticky MAC)
+---------------------------------------------------------------------------------------------------------------------------------
 
-## Network Design
+# Network Design
 
 ### WAN
 
@@ -30,23 +35,29 @@ This lab was built using Cisco Virtual IOS L2 (vIOS L2) switch images, Cisco 720
 
 The WAN-facing interface does not use a true public IP address because the lab environment is connected behind my home router. The “public” WAN segment is simulated using the 192.168.1.0/24 private address space through VMware bridged networking (VMnet0).
 
-- Simulated WAN block: 192.168.1.0/24
-
-- Edge Router (NAT):
-   - g0/0 = ISP (Network Adapter VMnet0 - Bridged)
-   - g1/0 = Point-to-point Link with Distribution Router
+- Cloud (Network Adapter VMnet0 - Bridged)
+   - Home router performs a second NAT translation to a real public IP before reaching the internet
+   - Ethernet 2 = Connected to Edge Router<br>
 
 ### Internal Networks
-  Network ---- Gateway ----
-- 192.168.10.0/24 ---- 192.168.10.254 ---- 
-- 192.168.20.0/24 ----	192.168.20.254 ---- 
+
+| Segment    | Network         | Gateway        |
+| ----------------- | --------------- | -------------- |
+| LAN 1             | 192.168.10.0/24 | 192.168.10.254 |
+| LAN 2             | 192.168.20.0/24 | 192.168.20.254 |
+| Edge Transit Link | 10.0.0.0/30     | Point-to-point |
+| Simulated WAN     | 192.168.1.0/24  | 192.168.1.1    |
+
+
 ---------------------------------------------------------------------------------------------------------------------------------
 ### NAT + ACLs
 
 #### Implemented on Edge Router
 
 - NAT Inside: g1/0 <br>
+   - Facing LAN
 - NAT Outside: g0/0 <br>
+   - Facing WAN
 
 NAT Overload (PAT) using named ACLs: <br>
 ip access-list standard PAT <br>
@@ -54,6 +65,8 @@ permit 192.168.10.0 0.0.0.255 <br>
 permit 192.168.20.0 0.0.0.255 <br>
 
 - ip nat inside source list PAT interface GigabitEthernet0/0 overload
+  - Allows devices from multiple devices to share a single IP using different port numbers.
+  
 ---------------------------------------------------------------------------------------------------------------------------------
 ### DHCP + DNS
 #### Centralized on Distribution Router
