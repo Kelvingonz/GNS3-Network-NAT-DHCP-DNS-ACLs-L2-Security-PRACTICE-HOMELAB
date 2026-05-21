@@ -45,7 +45,7 @@ The WAN-facing interface on the Edge Router does not use a true public IP addres
 | ----------------- | --------------- | -------------- |
 | LAN 1             | 192.168.10.0/24 | 192.168.10.254 |
 | LAN 2             | 192.168.20.0/24 | 192.168.20.254 |
-| Edge Transit Link | 10.0.0.0/30     | Point-to-point |
+| Core Transit | 10.0.0.0/30     | Point-to-point |
 | Simulated WAN     | 192.168.1.0/24  | 192.168.1.1    |
 
 
