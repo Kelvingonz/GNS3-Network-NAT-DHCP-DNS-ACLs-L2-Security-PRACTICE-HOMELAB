@@ -65,7 +65,7 @@ permit 192.168.10.0 0.0.0.255 <br>
 permit 192.168.20.0 0.0.0.255 <br>
 
 - ip nat inside source list PAT interface GigabitEthernet0/0 overload
-  - Allows devices from multiple devices to share a single IP using different port numbers.
+  - Allows multiple devices to share a single IP using different port numbers.
   
 ---------------------------------------------------------------------------------------------------------------------------------
 ### DHCP + DNS
