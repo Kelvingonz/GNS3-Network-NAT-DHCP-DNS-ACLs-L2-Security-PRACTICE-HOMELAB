@@ -21,7 +21,11 @@ This lab was built using Cisco Virtual IOS L2 (vIOS L2) switch images and Cisco 
 
 ### WAN
 
-- Public block: 192.168.1.0/24
+#####  #IMPORTANT NOTE# <br>
+
+The WAN-facing interface does not use a true public IP address because the lab environment is connected behind my home router. The “public” WAN segment is simulated using the 192.168.1.0/24 private address space through VMware bridged networking (VMnet0).
+
+- Simulated WAN block: 192.168.1.0/24
 
 - Edge Router (NAT):
    - g0/0 = ISP (Network Adapter VMnet0 - Bridged)
