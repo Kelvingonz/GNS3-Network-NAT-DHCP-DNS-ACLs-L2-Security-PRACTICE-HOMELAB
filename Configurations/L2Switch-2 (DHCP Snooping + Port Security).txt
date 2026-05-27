@@ -29,6 +29,7 @@ vtp mode transparent
 !
 !
 !
+ip dhcp snooping vlan 1
 no ip dhcp snooping information option
 ip dhcp snooping
 ip cef
